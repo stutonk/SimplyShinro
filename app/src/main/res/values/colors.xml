@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="blood">#880000</color>
+    <color name="bright_blood">#AA0000</color>
+    <color name="charcoal">#222222</color>
+    <color name="smoke">#707070</color>
+    <color name="silver">#A0A0A0</color>
+    <color name="star_blue">#007788</color>
+    <color name="star_bright_blue">#00AABB</color>
+    <color name="graphene">#000000</color>
+</resources>

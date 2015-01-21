@@ -1,0 +1,54 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/charcoal"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="stutonk.simplyshinro.ChooserActivity"
+    >
+
+    <TextView
+        android:id="@+id/choose_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/silver"
+        android:textSize="25sp"
+        android:text="@string/choose"
+        />
+    
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/choose_text"
+        android:layout_above="@+id/choose_return"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:gravity="center_horizontal"
+        >
+
+        <ExpandableListView
+            android:id="@+id/puzzle_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            </ExpandableListView>
+
+        </RelativeLayout>
+
+    <Button
+        android:id="@+id/choose_return"
+        android:onClick="returnToMain"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/silver"
+        android:textSize="25sp"
+        android:text="@string/return_to_main"
+        />
+
+</RelativeLayout>

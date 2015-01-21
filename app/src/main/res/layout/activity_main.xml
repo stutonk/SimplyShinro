@@ -1,0 +1,81 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@color/charcoal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    tools:context=".MainActivity"
+    >
+
+    <TextView
+        android:id="@+id/title_view1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textSize="100sp"
+        android:textColor="@color/star_blue"
+        android:text="@string/game_title1"
+        />
+
+    <TextView
+        android:id="@+id/title_view2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:textSize="100sp"
+        android:textColor="@color/star_blue"
+        android:text="@string/game_title2"
+        />
+
+    <Button
+        android:id="@+id/play_view"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/smoke"
+        android:onClick="launchChooser"
+        android:text="@string/play"
+        />
+
+    <Button
+        android:id="@+id/instructions_view"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/smoke"
+        android:onClick="launchInstructions"
+        android:text="@string/instructions"
+        />
+
+    <Button
+        android:id="@+id/quit_view"
+        style="@style/Widget.AppCompat.ActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textColor="@color/smoke"
+        android:onClick="exitGame"
+        android:text="@string/quit"
+        />
+
+    <TextView
+        android:id="@+id/beg_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/star_blue"
+        android:text="@string/beg"
+        />
+
+
+</LinearLayout>

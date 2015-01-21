@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Simply Shinro</string>
+    <string name="beg">"If you like my game, please take a moment to rate it and consider buying
+    the donation version.</string>
+    <string name="choose">Please choose your puzzle:</string>
+    <string name="game_title1">Simply</string>
+    <string name="game_title2">Shinro</string>
+    <string name="detailed_instructions">Shinro is a logic puzzle game played on an eight by eight
+    grid. The objective is to find the twelve hidden points by using the numbers at the top and left
+    of every column and row, respectively, and the arrows inside the grid.
+    \n\nThe general strategy is to look for simple moves first. Start by ruling out any spaces which
+    could not contain a point. Then, look for arrow paths which contain only one possible space in
+    which to place a point. Sometimes individual arrows are not enough to locate the next point. In
+    those cases, combinations of arrows must be considered.
+    \n\nEach arrow points to AT LEAST one hidden point. However, arrows may point to multiple hidden
+    points and not all hidden points are necessarily pointed to by any arrow.
+    \n\nTap any empty space one time to place a point. Xs may also be placed to mark spaces which
+    have been ruled out. Tap any point once or any empty space twice to place an X. Tapping the X
+    again will clear the space.
+    \n\nAt the top of every column and to the left of every row is a number represented by a group
+    of zero to eight pips. Please note that rows or columns headed by an empty space where a number
+    should be have zero hidden points in that row or column.
+    \n\nYou may tap the number to fill every empty space in that column or row with an X. Tap the
+    number again to remove all Xs from that column or row.
+    \n\nAs you fill in hidden points in a row or column, the individual pips in the number
+    will become highlighted. If you place more points than there are hidden in a given row or
+    column, the header number will turn red.
+    \n\nThe spaces in line with an arrow may be highlighted for convenience by tapping the arrow.
+    Tap the arrow again to unhighlight the line of spaces.</string>
+    <string name="instructions">Instructions</string>
+    <string name="play">Play</string>
+    <string name="quit">Quit</string>
+    <string name="return_to_main">Return to main menu</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_game">GameActivity</string>
+    <string name="title_activity_instructions">InstructionsActivity</string>
+    <string name="title_activity_chooser">ChooserActivity</string>
+
+</resources>
