@@ -6,7 +6,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
 
-
+/**
+ * Needs thorough documentation when there's more time.
+ * <p>
+ * Copyright 2015 Joseph Eib
+ * </p>
+ * @author Joseph Eib
+ * @since January 2015
+ */
 public class InstructionsActivity extends ActionBarActivity {
 
     TextView detailedInstructionsText, instructionsReturn;

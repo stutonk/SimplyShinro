@@ -5,7 +5,12 @@ import android.graphics.Color;
 import shinro.ShinroPuzzle;
 
 /**
- * Created by nasu on 1/20/15.
+ * Needs thorough documentation when there's more time.
+ * <p>
+ * Copyright 2015 Joseph Eib
+ * </p>
+ * @author Joseph Eib
+ * @since January 2015
  */
 public class Puzzle {
     private int resource;

@@ -13,7 +13,14 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Needs thorough documentation when there's more time.
+ * <p>
+ * Copyright 2015 Joseph Eib
+ * </p>
+ * @author Joseph Eib
+ * @since January 2015
+ */
 public class ChooserActivity extends ActionBarActivity
         implements ExpandableListView.OnChildClickListener{
 

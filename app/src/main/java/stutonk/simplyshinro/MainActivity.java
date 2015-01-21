@@ -7,11 +7,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.TextView;
 
-
+/**
+ * Needs thorough documentation when there's more time.
+ * <p>
+ * Copyright 2015 Joseph Eib
+ * </p>
+ * @author Joseph Eib
+ * @since January 2015
+ */
 public class MainActivity extends ActionBarActivity {
 
-    TextView title_view1, title_view2, play_view, instructions_view, quit_view, beg_view;
-    Typeface robotoThin;
+    private TextView title_view1, title_view2, play_view, instructions_view, quit_view, beg_view;
+    private Typeface robotoThin;
+    private static final boolean BEG = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,12 @@ public class MainActivity extends ActionBarActivity {
 
         beg_view = (TextView) findViewById(R.id.beg_view);
         beg_view.setTypeface(robotoThin);
+        if (BEG) {
+            beg_view.setText(R.string.beg);
+        }
+        else {
+            beg_view.setText(R.string.thank);
+        }
     }
 
     public void launchChooser(View view) {
@@ -50,27 +64,4 @@ public class MainActivity extends ActionBarActivity {
     public void exitGame(View view) {
         finish();
     }
-
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 }

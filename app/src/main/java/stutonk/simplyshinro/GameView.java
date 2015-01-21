@@ -16,7 +16,7 @@ import shinro.GridPos;
 import shinro.ShinroPuzzle;
 
 /**
- * This is where all the magic of the game happens and it deserves thurough documentation which I
+ * This is where all the magic of the game happens and it deserves thorough documentation which I
  * plan to do when there's more time.
  * <p>
  * Copyright 2015 Joseph Eib
@@ -24,7 +24,6 @@ import shinro.ShinroPuzzle;
  * @author Joseph Eib
  * @since January 2015
  */
-//TODO: comments
 public class GameView extends View {
 
     private class Point {

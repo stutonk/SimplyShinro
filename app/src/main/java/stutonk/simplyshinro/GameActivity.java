@@ -10,7 +10,14 @@ import java.util.Scanner;
 
 import shinro.ShinroPuzzle;
 
-
+/**
+ * Needs thorough documentation when there's more time.
+ * <p>
+ * Copyright 2015 Joseph Eib
+ * </p>
+ * @author Joseph Eib
+ * @since January 2015
+ */
 public class GameActivity extends ActionBarActivity {
 
     private int packResourceId;

@@ -12,10 +12,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Joseph Eib on 1/19/15.
+ * Needs thorough documentation when there's more time.
  * <p>
- * Adapted from the tutorial at
+ * Copyright 2015 Joseph Eib
+ * </p>
+ * <p>
+ * * Adapted from the tutorial at
  * http://www.dreamincode.net/forums/topic/270612-how-to-get-started-with-expandablelistview/
+ * </p>
+ * @author Joseph Eib
+ * @since January 2015
  */
 public class ExtendedExpandableListAdapter extends BaseExpandableListAdapter {
 
