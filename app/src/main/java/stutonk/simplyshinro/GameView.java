@@ -26,7 +26,8 @@ import shinro.ShinroPuzzle;
  */
 public class GameView extends View {
 
-    private class Point {
+    //C-style datatype for simplicity
+    private class Coord {
         float x, y;
     }
 
@@ -34,12 +35,12 @@ public class GameView extends View {
     private static final int NUMLINES = PUZZSIZE + 1;
 
     private int mHeight, mWidth;
-    private int squareSize, gridSize, actualGridSize, buttonSize;
+    private int gridSize, actualGridSize, squareSize;
     private float stroke, fatStroke, bigStroke, lineOffset, xOffset, yOffset, cornerOffset;
     private boolean puzzleSolved, puzzleFull;
-    private Point[][] corners;
+    private Coord[][] corners;
     private Canvas compositor;
-    private Bitmap gameBitmap, squareBitmap, bigSquareBitmap, buttonBitmap;
+    private Bitmap gameBitmap, squareBitmap, bigSquareBitmap;
     private Paint blankPaint, backgroundPaint, gridPaint, gridHighlightPaint, pointPaint,
             pointHighlightPaint, xPaint, xHighlightPaint, victoryPaint, defeatPaint, textPaint,
             difficultyTextPaint;
@@ -90,9 +91,8 @@ public class GameView extends View {
         gridSize = (int) (lineOffset * NUMLINES);
         actualGridSize = (int) (Math.ceil(lineOffset * NUMLINES) + (stroke * 2));
         bigStroke = gridSize * (stroke / squareSize);
-        buttonSize = mWidth / 6;
 
-        corners = new Point[NUMLINES][NUMLINES];
+        corners = new Coord[NUMLINES][NUMLINES];
 
         initPaints();
         initBitmaps();
@@ -113,11 +113,6 @@ public class GameView extends View {
         bigSquareBitmap = Bitmap.createBitmap(actualGridSize, actualGridSize,
                 Bitmap.Config.ARGB_8888);
         compositor = new Canvas(bigSquareBitmap);
-        compositor.drawPaint(backgroundPaint);
-
-        //create button
-        buttonBitmap = Bitmap.createBitmap(buttonSize, buttonSize, Bitmap.Config.ARGB_8888);
-        compositor = new Canvas(buttonBitmap);
         compositor.drawPaint(backgroundPaint);
 
         //Create the gameBitmap
@@ -187,6 +182,9 @@ public class GameView extends View {
         xPaint.setStrokeCap(Paint.Cap.SQUARE);
         xPaint.setStrokeJoin(Paint.Join.MITER);
         xPaint.setColor(getResources().getColor(R.color.bright_blood));
+        xPaint.setTextSize(mHeight / 20);
+        xPaint.setTypeface(robotoThin);
+        xPaint.setTextAlign(Paint.Align.CENTER);
 
         xHighlightPaint = new Paint();
         xHighlightPaint.setAntiAlias(true);
@@ -238,8 +236,8 @@ public class GameView extends View {
     }
 
     private void blitArrow(int row, int col, int dir, Paint paint) {
-        Bitmap mSquare = Bitmap.createBitmap(squareBitmap);
-        compositor = new Canvas(mSquare);
+        Bitmap bitmap = Bitmap.createBitmap(squareBitmap);
+        compositor = new Canvas(bitmap);
         compositor.drawPaint(backgroundPaint);
 
         float lineX, lineY, lineEndX, lineEndY;
@@ -371,7 +369,7 @@ public class GameView extends View {
 
         //reset the compositor to the gameBitmap and blit
         compositor = new Canvas(gameBitmap);
-        compositor.drawBitmap(mSquare, corners[row + 1][col + 1].x,
+        compositor.drawBitmap(bitmap, corners[row + 1][col + 1].x,
                 corners[row + 1][col + 1].y, blankPaint);
     }
 
@@ -391,8 +389,8 @@ public class GameView extends View {
         float rectSize = lineOffset / 5f;
         Paint paint;
 
-        Bitmap mSquare = Bitmap.createBitmap(squareBitmap);
-        compositor = new Canvas(mSquare);
+        Bitmap bitmap = Bitmap.createBitmap(squareBitmap);
+        compositor = new Canvas(bitmap);
         compositor.drawPaint(backgroundPaint);
 
         if (odd) {
@@ -468,7 +466,7 @@ public class GameView extends View {
 
         //reset the compositor to the gameBitmap and blit
         compositor = new Canvas(gameBitmap);
-        compositor.drawBitmap(mSquare, corners[row][col].x, corners[row][col].y, blankPaint);
+        compositor.drawBitmap(bitmap, corners[row][col].x, corners[row][col].y, blankPaint);
     }
 
     /*private void blitNum(GridPos pos, int num, int numFilled) {
@@ -476,15 +474,15 @@ public class GameView extends View {
     }*/
 
     private void blitPoint(int row, int col, Paint paint) {
-        Bitmap mSquare = Bitmap.createBitmap(squareBitmap);
-        compositor = new Canvas(mSquare);
+        Bitmap bitmap = Bitmap.createBitmap(squareBitmap);
+        compositor = new Canvas(bitmap);
         compositor.drawPaint(backgroundPaint);
         compositor.drawCircle(squareSize / 2, squareSize / 2,
                 squareSize / 2 - (paint.getStrokeWidth() / 2), paint);
 
         //reset the compositor to the gameBitmap and blit
         compositor = new Canvas(gameBitmap);
-        compositor.drawBitmap(mSquare, corners[row + 1][col + 1].x,
+        compositor.drawBitmap(bitmap, corners[row + 1][col + 1].x,
                 corners[row + 1][col + 1].y, blankPaint);
     }
 
@@ -495,15 +493,15 @@ public class GameView extends View {
     private void blitSquare(int row, int col, Paint paint) {
         float paintStroke = paint.getStrokeWidth();
         float squareOffset = paintStroke / 2 + lineOffset / 20;
-        Bitmap mSquare = Bitmap.createBitmap(squareBitmap);
-        compositor = new Canvas(mSquare);
+        Bitmap bitmap = Bitmap.createBitmap(squareBitmap);
+        compositor = new Canvas(bitmap);
         compositor.drawPaint(backgroundPaint);
         compositor.drawRect(squareOffset, squareOffset, squareSize - squareOffset,
                 squareSize - squareOffset, paint);
 
         //reset the compositor to the gameBitmap and blit
         compositor = new Canvas(gameBitmap);
-        compositor.drawBitmap(mSquare, corners[row + 1][col + 1].x,
+        compositor.drawBitmap(bitmap, corners[row + 1][col + 1].x,
                 corners[row + 1][col + 1].y, blankPaint);
     }
 
@@ -512,15 +510,15 @@ public class GameView extends View {
     }
 
     private void blitX(int row, int col, Paint paint) {
-        Bitmap mSquare = Bitmap.createBitmap(squareBitmap);
-        compositor = new Canvas(mSquare);
+        Bitmap bitmap = Bitmap.createBitmap(squareBitmap);
+        compositor = new Canvas(bitmap);
         compositor.drawPaint(backgroundPaint);
         compositor.drawLine(0, 0, squareSize, squareSize, paint);
         compositor.drawLine(0, squareSize, squareSize, 0, paint);
 
         //reset the compositor to the gameBitmap and blit
         compositor = new Canvas(gameBitmap);
-        compositor.drawBitmap(mSquare, corners[row + 1][col + 1].x,
+        compositor.drawBitmap(bitmap, corners[row + 1][col + 1].x,
                 corners[row + 1][col + 1].y, blankPaint);
     }
 
@@ -529,27 +527,78 @@ public class GameView extends View {
     }
 
     private void blitVictory() {
-        Bitmap mSquare = Bitmap.createBitmap(bigSquareBitmap);
-        compositor = new Canvas(mSquare);
+        Bitmap bitmap = Bitmap.createBitmap(bigSquareBitmap);
+        compositor = new Canvas(bitmap);
         compositor.drawPaint(backgroundPaint);
         compositor.drawCircle(actualGridSize / 2, actualGridSize / 2,
                 actualGridSize / 2 - (victoryPaint.getStrokeWidth() / 2), victoryPaint);
 
         //reset the compositor to the gameBitmap and blit
         compositor = new Canvas(gameBitmap);
-        compositor.drawBitmap(mSquare, xOffset - stroke, yOffset - stroke, blankPaint);
+        compositor.drawBitmap(bitmap, xOffset - stroke, yOffset - stroke, blankPaint);
     }
 
     private void blitDefeat() {
-        Bitmap mSquare = Bitmap.createBitmap(bigSquareBitmap);
-        compositor = new Canvas(mSquare);
+        Bitmap bitmap = Bitmap.createBitmap(bigSquareBitmap);
+        compositor = new Canvas(bitmap);
         compositor.drawPaint(backgroundPaint);
         compositor.drawLine(0, 0, actualGridSize, actualGridSize, defeatPaint);
         compositor.drawLine(0, actualGridSize, actualGridSize, 0, defeatPaint);
 
         //reset the compositor to the gameBitmap and blit
         compositor = new Canvas(gameBitmap);
-        compositor.drawBitmap(mSquare, xOffset - stroke, yOffset - stroke, blankPaint);
+        compositor.drawBitmap(bitmap, xOffset - stroke, yOffset - stroke, blankPaint);
+    }
+
+    private void blitBack() {
+        Bitmap bitmap = Bitmap.createBitmap(squareBitmap);
+        compositor = new Canvas(bitmap);
+        compositor.drawPaint(backgroundPaint);
+        //compositor.drawRect(0, 0, squareSize, squareSize, gridPaint);
+
+        float lineX, lineEndX, lineY, lineEndY, arrowPointX, arrowPointY, arrowTipX1, arrowTipX2,
+                arrowTipY1, arrowTipY2;
+
+        lineX = squareSize / 12;
+        lineEndX = squareSize - squareSize / 12;
+        lineY = lineEndY = squareSize / 2;
+
+        arrowPointX = lineX;
+        arrowPointY = lineY;
+        arrowTipX1 = arrowTipX2 = squareSize / 2;
+        arrowTipY1 = squareSize / 12;
+        arrowTipY2 = squareSize - squareSize / 12;
+
+        compositor.drawLine(lineX, lineY, lineEndX, lineEndY, xPaint);
+        compositor.drawLine(arrowPointX, arrowPointY, arrowTipX1, arrowTipY1, xPaint);
+        compositor.drawLine(arrowPointX, arrowPointY, arrowTipX2, arrowTipY2, xPaint);
+
+        compositor = new Canvas(gameBitmap);
+        compositor.drawBitmap(bitmap, mWidth / 4 - squareSize / 2,
+                ((mHeight - gridSize - yOffset) / 2) + yOffset + gridSize - squareSize / 2,
+                blankPaint);
+        compositor.drawCircle(mWidth / 4,
+                ((mHeight - gridSize - yOffset) / 2) + yOffset + gridSize,
+                squareSize / 2 + stroke * 5, xPaint);
+    }
+
+    private void blitReset() {
+        Bitmap bitmap = Bitmap.createBitmap(squareBitmap);
+        compositor = new Canvas(bitmap);
+        compositor.drawPaint(backgroundPaint);
+
+        compositor.drawLine(squareSize / 12, squareSize / 12, squareSize - squareSize / 12,
+                squareSize - squareSize / 12, xPaint);
+        compositor.drawLine(squareSize / 12, squareSize - squareSize / 12,
+                squareSize - squareSize / 12, squareSize / 12, xPaint);
+
+        compositor = new Canvas(gameBitmap);
+        compositor.drawBitmap(bitmap, mWidth / 4 * 3 - squareSize / 2,
+                ((mHeight - gridSize - yOffset) / 2) + yOffset + gridSize - squareSize / 2,
+                blankPaint);
+        compositor.drawCircle(mWidth / 4 * 3,
+                ((mHeight - gridSize - yOffset) / 2) + yOffset + gridSize,
+                squareSize / 2 + stroke * 5, xPaint);
     }
 
     private void drawGrid() {
@@ -567,7 +616,7 @@ public class GameView extends View {
 
         for (int row = 0; row < NUMLINES; row++) {
             for (int col = 0; col < NUMLINES; col++) {
-                corners[row][col] = new Point();
+                corners[row][col] = new Coord();
                 corners[row][col].x = verticals[col] - lineOffset + stroke;
                 corners[row][col].y = horizontals[row] - lineOffset + stroke;
             }
@@ -597,17 +646,20 @@ public class GameView extends View {
         compositor.drawText("(difficulty: " + Integer.toString(puzzle.getDifficulty()) + "%)",
                 mWidth / 2, yOffset / 2 + difficultyTextPaint.getTextSize() / 2,
                 difficultyTextPaint);
+
+        blitBack();
+        blitReset();
     }
 
-    private boolean inGrid(Point point) {
-        return point.x > xOffset && point.x < xOffset + gridSize && point.y > yOffset
-                && point.y < yOffset + gridSize;
+    private boolean inGrid(Coord coord) {
+        return coord.x > xOffset && coord.x < xOffset + gridSize && coord.y > yOffset
+                && coord.y < yOffset + gridSize;
     }
 
-    private GridPos getPosFromPoint(Point point) {
+    private GridPos getPosFromCoord(Coord coord) {
         int row, col;
-        row = (int)((point.y - yOffset) / lineOffset);
-        col = (int)((point.x - xOffset) / lineOffset);
+        row = (int)((coord.y - yOffset) / lineOffset);
+        col = (int)((coord.x - xOffset) / lineOffset);
         return new GridPos(row, col);
     }
 
@@ -843,7 +895,7 @@ public class GameView extends View {
     //TODO: Add feedback, sound
     @Override
     public boolean onTouchEvent(@NonNull MotionEvent event) {
-        Point where = new Point();
+        Coord where = new Coord();
 
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             where.x = event.getX();
@@ -861,8 +913,29 @@ public class GameView extends View {
                     reset();
                 }
                 else {
-                    updateGame(getPosFromPoint(where));
+                    updateGame(getPosFromCoord(where));
                 }
+            }
+            //back button
+            else if (where.x > mWidth / 4 - squareSize / 2
+                    && where.x < mWidth / 4 + squareSize / 2
+                    && where.y > ((mHeight - gridSize - yOffset) / 2)
+                        + yOffset + gridSize - squareSize / 2
+                    && where.y < ((mHeight - gridSize - yOffset) / 2)
+                        + yOffset + gridSize + squareSize / 2) {
+                if (mContext instanceof GameActivity) {
+                    GameActivity activity = (GameActivity) mContext;
+                    activity.finish();
+                }
+            }
+            //reset button
+            else if (where.x > mWidth / 4 * 3 - squareSize / 2
+                    && where.x < mWidth / 4 * 3 + squareSize / 2
+                    && where.y > ((mHeight - gridSize - yOffset) / 2)
+                    + yOffset + gridSize - squareSize / 2
+                    && where.y < ((mHeight - gridSize - yOffset) / 2)
+                    + yOffset + gridSize + squareSize / 2) {
+                reset();
             }
         }
 
